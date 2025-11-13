@@ -23,23 +23,41 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Serve Bootstrap CSS
-app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
+app.use(
+  "/css",
+  express.static(path.join(__dirname, "node_modules/bootstrap/dist/css"))
+);
 
 // Serve Bootstrap JS
-app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+app.use(
+  "/js",
+  express.static(path.join(__dirname, "node_modules/bootstrap/dist/js"))
+);
 
 // Serve Popper.js
-app.use('/js', express.static(path.join(__dirname, 'node_modules/@popperjs/core/dist/umd')));
+app.use(
+  "/js",
+  express.static(path.join(__dirname, "node_modules/@popperjs/core/dist/umd"))
+);
 
+let books = [
+  {
+    id: 1,
+    title: "My book 1",
+    date: "Nov 11, 25",
+    isbn: "0385472579",
+    description:
+      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
+  },
+];
 
 app.get("/", (req, res) => {
-  res.render("book.ejs", {title: "Home", message: "Working"});
+  res.render("index.ejs", { books: books, title: "Home", message: "Working" });
 });
 
 app.listen(port, () => {
   console.log(`Server running on port: http://localhost:${port}`);
 });
-
