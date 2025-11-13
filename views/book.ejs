@@ -1,0 +1,66 @@
+<%- include('partials/header.ejs'); -%>
+
+    <body>
+
+        <div class="container mb-3">
+            <header class="border-bottom lh-1 py-3">
+                <div class="row flex-nowrap justify-content-between align-items-center">
+                    <div class="col-4 pt-1"> <a class="link-secondary" href="#">Subscribe</a> </div>
+                    <div class="col-4 text-center"> <a class="blog-header-logo text-body-emphasis text-decoration-none"
+                            href="#">Large</a> </div>
+                    <div class="col-4 d-flex justify-content-end align-items-center"> <a class="link-secondary" href="#"
+                            aria-label="Search"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24">
+                                <title>Search</title>
+                                <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                                <path d="M21 21l-5.2-5.2"></path>
+                            </svg> </a> <a class="btn btn-sm btn-outline-secondary" href="#">Sign up</a> </div>
+                </div>
+            </header>
+        </div>
+        <div class="container px-5">
+            <!-- book cover and details -->
+            <div class="row g-5 align-items-start">
+                <!-- image -->
+                <div class="col-md-4 text-center">
+                    <img src="https://covers.openlibrary.org/b/isbn/0385472579-L.jpg" class="img-fluid rounded"
+                        alt="Book Cover Placeholder">
+                </div>
+                <!-- book details -->
+                <div class="col-md-8">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2 class="fw-bold">Your Book Title Here</h2>
+                        </div>
+                        <!-- edit button -->
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-bd-primary">
+                                <i class="bi bi-pencil"></i> Edit
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text-body-secondary mb-1">ISBN: 978-0-000-00000-0</p>
+                    <p class="text-body-secondary mb-3">Read: October 26, 2024</p>
+
+                    <div>
+                        <span class="badge bg-primary fs-6">
+                            Rating: 8/10
+                        </span>
+                    </div>
+
+                    <p class="mt-3">
+                        This is where a short description of the book would go.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <hr>
+        </div>
+        <script src="/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/script.js"></script>
+    </body>
+
+    </html>
