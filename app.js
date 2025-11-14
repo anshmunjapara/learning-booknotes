@@ -49,13 +49,63 @@ let books = [
     title: "My book 1",
     date: "Nov 11, 25",
     isbn: "0385472579",
+    rating: 8,
     description:
       "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
   },
 ];
 
+let notes = [
+  {
+    id: 1,
+    datetime: "Nov 11, 25",
+    content: "porro, velit et aut odio recusandae. Autem reprehender",
+  },
+  {
+    id: 2,
+    datetime: "Nov 11, 25",
+    content:
+      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
+  },
+  {
+    id: 3,
+    datetime: "Nov 11, 25",
+    content:
+      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
+  },
+  {
+    id: 4,
+    datetime: "Nov 11, 25",
+    content:
+      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
+  },
+  {
+    id: 5,
+    datetime: "Nov 11, 25",
+    content:
+      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
+  },
+  {
+    id: 6,
+    datetime: "Nov 11, 25",
+    content: "porro, velit et aut odio recusandae. Autem reprehend",
+  },
+  {
+    id: 7,
+    datetime: "Nov 11, 25",
+    content:
+      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
+  },
+  {
+    id: 8,
+    datetime: "Nov 11, 25",
+    content:
+      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
+  },
+];
+
 app.get("/", (req, res) => {
-  res.render("index.ejs", { books: books, title: "Home", message: "Working" });
+  res.render("book.ejs", { book: books[0], title: "Home", message: "Working", notes: notes});
 });
 
 app.listen(port, () => {
