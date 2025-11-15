@@ -1,6 +1,8 @@
+import { time } from "console";
 import express from "express";
 import path from "path";
 import pg from "pg";
+import { title } from "process";
 import { fileURLToPath } from "url"; // Import fileURLToPath
 
 // Define __filename and __dirname
@@ -42,18 +44,6 @@ app.use(
   "/js",
   express.static(path.join(__dirname, "node_modules/@popperjs/core/dist/umd"))
 );
-
-let books = [
-  {
-    id: 1,
-    title: "My book 1",
-    date: "Nov 11, 25",
-    isbn: "0385472579",
-    rating: 8,
-    description:
-      "porro, velit et aut odio recusandae. Autem reprehenderit eaque optio voluptatem, temporibus ipsum",
-  },
-];
 
 let notes = [
   {
@@ -104,13 +94,44 @@ let notes = [
   },
 ];
 
-app.get("/", (req, res) => {
-  res.render("book.ejs", {
-    book: books[0],
+app.get("/", async (req, res) => {
+  let books = []; 
+  try {
+    const result = await db.query(
+      "SELECT * FROM books",
+    );
+    books = result.rows;
+  } catch (e) {
+    console.log(e);
+  }
+
+  res.render("index.ejs", {
+    books: books,
     title: "Home",
-    message: "Working",
     notes: notes,
   });
+});
+
+app.get("/add-book", (req, res) => {
+  res.render("add-book.ejs", { title: "Add new book" });
+});
+
+app.post("/add-book", async (req, res) => {
+  const title = req.body.title;
+  const isbn = req.body.isbn;
+  const rating = req.body.rating;
+  const description = req.body.description;
+
+  try {
+    const result = await db.query(
+      'INSERT INTO books (title, isbn, "date", rating, des) VALUES ($1, $2, CURRENT_DATE, $3, $4)',
+      [title, isbn, rating, description]
+    );
+    items = result.rows;
+  } catch (e) {
+    console.log(e);
+  }
+  res.redirect("/");
 });
 
 app.post("/add-new-note", async (req, res) => {

@@ -26,9 +26,13 @@
                         efficiently about what’s most interesting in this post’s contents.</p>
                 </div>
             </div>
+            <div>
+                <a href="/add-book"><button type="button" class="btn btn-primary mb-4">Add New book </button></a>
+            </div>
             <div class="row mb-2">
-                <div class="col-md-6">
-                    <% books.forEach(book=> { %>
+
+                <% books.forEach(book=> { %>
+                    <div class="col-md-6">
                         <div
                             class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
 
@@ -37,10 +41,12 @@
                                     <%= book.title %>
                                 </h3>
                                 <div class="mb-1 text-body-secondary">
-                                    <%= book.date %>
+                                    <% const d=new Date(book.date); const formatted=d.toLocaleDateString("en-US", {
+                                        day: "2-digit" , month: "short" , year: "2-digit" }); %>
+                                        <%= formatted %>
                                 </div>
                                 <p class="card-text mb-auto">
-                                    <%= book.description %>
+                                    <%= book.des %>
                                 </p>
                                 <a href="/book/<%= book.id %>" class="icon-link gap-1 icon-link-hover stretched-link">
                                     Continue reading
@@ -55,8 +61,8 @@
                                     style="object-fit: cover;">
                             </div>
                         </div>
-                        <% }); %>
-                </div>
+                    </div>
+                    <% }); %>
             </div>
         </main>
 

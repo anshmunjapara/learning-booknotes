@@ -1,0 +1,48 @@
+<%- include("partials/header.ejs") -%>
+
+    <body>
+
+        <div class="container mt-4">
+            <h4 class="fw-bold mb-3">Add New Book</h4>
+
+            <form id="bookForm" class="p-3 border rounded shadow-sm bg-dark-subtle" action="/add-book" method="post">
+
+                <!-- Title -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Title</label>
+                    <input type="text" class="form-control" name="title" placeholder="Enter book title" required>
+                </div>
+
+                <!-- ISBN -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">ISBN</label>
+                    <input type="text" class="form-control" name="isbn" placeholder="ISBN number" required>
+                </div>
+
+                <!-- Rating -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Rating (1–10)</label>
+                    <input type="number" class="form-control" name="rating" min="1" max="10" placeholder="8" required>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Description</label>
+                    <textarea class="form-control" name="description" rows="4" placeholder="Write a description..."
+                        required></textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-end gap-2">
+                    <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+        </div>
+
+        <script src="/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/script.js"></script>
+    </body>
+
+    <%- include('partials/footer.ejs'); -%>
