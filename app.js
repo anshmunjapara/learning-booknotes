@@ -105,7 +105,27 @@ let notes = [
 ];
 
 app.get("/", (req, res) => {
-  res.render("book.ejs", { book: books[0], title: "Home", message: "Working", notes: notes});
+  res.render("book.ejs", {
+    book: books[0],
+    title: "Home",
+    message: "Working",
+    notes: notes,
+  });
+});
+
+app.post("/add-new-note", async (req, res) => {
+  const content = req.body.content;
+  const bookId = req.body.bookId;
+
+  try {
+    const result = await db.query(
+      "INSERT INTO notes (content, datetime, book_id) VALUES ($1, NOW(), $2)",
+      [content, bookId]
+    );
+    items = result.rows;
+  } catch (e) {
+    console.log(e);
+  }
 });
 
 app.listen(port, () => {
