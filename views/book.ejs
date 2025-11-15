@@ -65,32 +65,49 @@
         </div>
         <div class="container">
             <h4 class="fw-bold mb-3">My Notes</h4>
+
+            <div id="addNotePanel" class="add-note-panel">
+                <div class="panel-content py-3">
+                    <textarea id="newNoteText" class="form-control mb-3" rows="4"
+                        placeholder="Write your note..."></textarea>
+                    <div class="d-flex justify-content-end gap-2">
+                        <button id="cancelNoteBtn" class="btn btn-secondary">Cancel</button>
+                        <button id="submitNoteBtn" class="btn btn-primary">Add New</button>
+                    </div>
+                </div>
+            </div>
+
             <% notes.forEach(note=> { %>
-                <div class="card mb-3">
+                <div class="card mb-3 note-card" data-id="<%= note.id %>">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-body-secondary">
+
+                        <h6 class="card-subtitle mb-2 text-body-secondary note-time">
                             <%= note.datetime %>
                         </h6>
-                        <p class="card-text">
+
+                        <p class="card-text note-content">
                             <%= note.content %>
                         </p>
-                        <div class="d-flex gap-2 justify-content-end">
 
-                            <a href="#" class="btn btn-sm btn-primary">
-                                <i class="bi bi-pencil-square"></i>
-                            </a>
+                        <textarea class="form-control note-textarea mb-3 d-none"><%= note.content %></textarea>
 
-                            <a href="#" class="btn btn-sm btn-outline-danger">
-                                <i class="bi bi-trash"></i>
-                            </a>
-
+                        <div class="buttons-view d-flex gap-2 justify-content-end">
+                            <a href="#" class="btn btn-sm btn-primary btn-edit"><i class="bi bi-pencil-square"></i></a>
+                            <a href="#" class="btn btn-sm btn-outline-danger btn-delete"><i class="bi bi-trash"></i></a>
                         </div>
+
+                        <div class="buttons-edit d-flex gap-2 justify-content-end d-none">
+                            <a href="#" class="btn btn-sm btn-success btn-submit">Submit</a>
+                            <a href="#" class="btn btn-sm btn-secondary btn-cancel">Cancel</a>
+                        </div>
+
                     </div>
                 </div>
                 <% }); %>
         </div>
+
         <script src="/js/bootstrap.bundle.min.js"></script>
-        <script src="/js/script.js"></script>
+        <script src="/js/book.js"></script>
     </body>
 
     <%- include('partials/footer.ejs'); -%>
