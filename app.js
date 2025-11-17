@@ -160,19 +160,20 @@ app.post("/add-book", async (req, res) => {
   res.redirect("/");
 });
 
-app.post("/add-new-note", async (req, res) => {
+app.post("/add-note", async (req, res) => {
   const content = req.body.content;
   const bookId = req.body.bookId;
 
   try {
     const result = await db.query(
-      "INSERT INTO notes (content, datetime, book_id) VALUES ($1, NOW(), $2)",
+      "INSERT INTO notes (content, date, book_id) VALUES ($1, NOW(), $2)",
       [content, bookId]
     );
-    items = result.rows;
+    
   } catch (e) {
     console.log(e);
   }
+  res.json({ success: true });
 });
 
 app.listen(port, () => {

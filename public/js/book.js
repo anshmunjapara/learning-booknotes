@@ -63,18 +63,27 @@ const textarea = document.getElementById("newNoteText");
 const btnSubmit = document.getElementById("submitNoteBtn");
 const btnCancel = document.getElementById("cancelNoteBtn");
 
-
 btnCancel.addEventListener("click", () => {
   textarea.value = ""; // clear text
 });
 
 // Submit new note
-btnSubmit.addEventListener("click", () => {
+btnSubmit.addEventListener("click", async () => {
   const noteText = textarea.value.trim();
   if (!noteText) return;
 
-  console.log("New Note:", noteText);
+  const bookId = window.location.pathname.split("/")[2];
+  const res = await fetch("/add-note", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      bookId: bookId,
+      content: noteText,
+    }),
+  });
 
-  // TODO: send AJAX to server here
-  textarea.value = "";
+  const data = await res.json();
+  window.location.reload();
 });
