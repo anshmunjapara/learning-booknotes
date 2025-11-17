@@ -95,11 +95,9 @@ let notes = [
 ];
 
 app.get("/", async (req, res) => {
-  let books = []; 
+  let books = [];
   try {
-    const result = await db.query(
-      "SELECT * FROM books",
-    );
+    const result = await db.query("SELECT * FROM books");
     books = result.rows;
   } catch (e) {
     console.log(e);
@@ -108,8 +106,36 @@ app.get("/", async (req, res) => {
   res.render("index.ejs", {
     books: books,
     title: "Home",
-    notes: notes,
   });
+});
+
+async function fetchBook(id) {
+  try {
+    const result = await db.query("SELECT * FROM books WHERE id = $1", [id]);
+    let book = result.rows[0];
+    return book;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+async function fetchNotes(book_id) {
+  try {
+    const result = await db.query("SELECT * FROM notes WHERE book_id = $1", [
+      book_id,
+    ]);
+    let notes = result.rows;
+    return notes;
+  } catch (e) {
+    console.log(e);
+  }
+}
+app.get("/book/:id", async (req, res) => {
+  const bookId = req.params.id;
+  const book = await fetchBook(bookId);
+  const notes = await fetchNotes(bookId);
+
+  res.render("book.ejs", { book: book, notes: notes, title: "Book" });
 });
 
 app.get("/add-book", (req, res) => {
